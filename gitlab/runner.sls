@@ -9,24 +9,24 @@ gitlab-ci-multi-runner:
     - require_in:
       - pkg: gitlab-ci-multi-runner
 
-gitlab-ci-multi-runner
+gitlab-ci-multi-runner:
   pkg.latest:
     - name: gitlab-ci-multi-runner
 
 
-register-runner
+register-runner:
   cmd.run:
     - name: gitlab-runner register --description {{ grains['fqdn'] }} --non-interactive --url {{ gitlab.url }} --registration-token {{ gitlab.token }}
     - creates: /etc/gitlab-runner/config.toml
 
-install-runner
+install-runner:
   cmd.run:
     - name: gitlab-runner install --user gitlab-runner --working-directory /home/gitlab-runner/
     - creates: /etc/init/gitlab-runner.conf
     - require:
       - cmd: register-runner
 
-start-runner
+start-runner:
   cmd.run:
     - name: gitlab-runner start
     - require:
