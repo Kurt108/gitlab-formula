@@ -47,3 +47,12 @@ github-gitlab-ci-runner:
     - fingerprint: {{ salt['pillar.get']('github:fingerprint') }}
     - require:
       - user: gitlab-runner
+
+dotenv:
+  file.managed:
+    - name: /home/gitlab-runner/.env
+    - user: gitlab-runner
+    - source: salt://gitlab/dotenv
+    - require:
+      - user: jenkins
+    - template: jinja
