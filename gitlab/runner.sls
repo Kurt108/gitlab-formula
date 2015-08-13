@@ -48,7 +48,7 @@ github-gitlab-ci-runner:
     - require:
       - user: gitlab-runner
 
-dotenv:
+managed-dotenv:
   file.managed:
     - name: /home/gitlab-runner/.env
     - user: gitlab-runner
