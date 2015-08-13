@@ -1,7 +1,8 @@
 {% set gitlab = salt['grains.filter_by']({
   'default': {
     'url': 'http:/to.itab.server',
-    'token': 'change-token'
+    'token': 'change-token',
+    'identifier': 'default'
   },
 }, merge=salt['pillar.get']('gitlab:lookup')) %}
 
