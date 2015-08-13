@@ -16,7 +16,7 @@ package-gitlab-ci-multi-runner:
 
 register-runner:
   cmd.run:
-    - name: gitlab-runner register --description {{ grains['fqdn'] }}-{{gitlab.identifier}} --non-interactive --url {{ gitlab.url }} --registration-token {{ gitlab.token }}
+    - name: gitlab-runner register --tag-list  {{ grains['fqdn'] }},{{gitlab.identifier}},{{ grains['fqdn'] }},{{gitlab.identifier}} --description {{ grains['fqdn'] }}-{{gitlab.identifier}} --non-interactive --url {{ gitlab.url }} --registration-token {{ gitlab.token }}
     - creates: /etc/gitlab-runner/config.toml
 
 install-runner:
