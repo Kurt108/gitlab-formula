@@ -1,5 +1,8 @@
 {% from "gitlab/map.jinja" import gitlab with context %}
 
+include:
+  - users
+
 
 
 repo-gitlab-ci-multi-runner:
@@ -31,3 +34,16 @@ start-runner:
     - name: gitlab-runner start
     - require:
       - cmd: install-runner
+
+
+
+
+github-gitlab-ci-runner:
+  ssh_known_hosts:
+    - present
+    - name: github.com
+    - user: gitlab-runner
+    - enc: ssh-rsa
+    - fingerprint: {{ salt['pillar.get']('github:fingerprint') }}
+    - require:
+      - user: gitlab-runner
