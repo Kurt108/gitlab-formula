@@ -1,3 +1,3 @@
 #!/bin/bash
-echo $PWD/web > /etc/nginx/conf.d/doc_root.conf
+echo root $PWD/web; > /etc/nginx/conf.d/doc_root.conf
 service nginx reload
