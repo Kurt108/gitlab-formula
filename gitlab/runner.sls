@@ -43,7 +43,7 @@ start-runner:
     - name: gitlab-runner start
     - require:
       - cmd: install-runner
-    - unless:
+    - onlyif:
       - cmd: pgrep -f gitlab-ci-multi-runner
 
 
