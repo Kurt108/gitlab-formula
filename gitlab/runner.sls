@@ -54,5 +54,5 @@ managed-dotenv:
     - user: gitlab-runner
     - source: salt://gitlab/dotenv
     - require:
-      - user: jenkins
+      - user: gitlab-runner
     - template: jinja
