@@ -16,7 +16,7 @@ package-gitlab-ci-multi-runner:
   pkg.installed:
     - name: gitlab-ci-multi-runner
     - require:
-      - user: gitlab-runnner
+      - user: gitlab-runner
 
 
 register-runner:
