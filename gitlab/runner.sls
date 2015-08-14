@@ -13,8 +13,10 @@ repo-gitlab-ci-multi-runner:
       - pkg: package-gitlab-ci-multi-runner
 
 package-gitlab-ci-multi-runner:
-  pkg.latest:
+  pkg.installed:
     - name: gitlab-ci-multi-runner
+    - require:
+      - user: gitlab-runnner
 
 
 register-runner:
@@ -25,6 +27,9 @@ register-runner:
       - grep 'token = "'{{ gitlab.token }} /etc/gitlab-runner/config.toml
       - grep 'tags = "'{{ grains['fqdn'] }},{{gitlab.identifier}},{{ grains['fqdn'] }},{{gitlab.identifier}} /etc/gitlab-runner/config.toml
       - grep 'name = "'{{ grains['fqdn'] }}-{{gitlab.identifier}} /etc/gitlab-runner/config.toml
+    - require:
+      - pkg: package-gitlab-ci-multi-runner
+
 
 install-runner:
   cmd.run:
@@ -39,7 +44,7 @@ start-runner:
     - require:
       - cmd: install-runner
     - unless:
-      - cmd: pgrep -f gitlab-ci-multi-runner 
+      - cmd: pgrep -f gitlab-ci-multi-runner
 
 
 github-gitlab-ci-runner:
