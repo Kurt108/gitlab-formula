@@ -39,7 +39,7 @@ start-runner:
     - require:
       - cmd: install-runner
     - unless:
-      - cmd: gitlab-runner restart
+      - cmd: pgrep -f gitlab-ci-multi-runner 
 
 
 github-gitlab-ci-runner:
