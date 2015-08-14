@@ -46,9 +46,9 @@ reconfigure-nginx:
     - user: root
     - mode: 755
     - source: salt://gitlab/reconfigure-nginx.sh
-  - require:
-    - user: gitlab-runner
-  - template: jinja
+    - require:
+      - user: gitlab-runner
+    - template: jinja
 
 
 start-runner:
