@@ -38,6 +38,19 @@ install-runner:
     - require:
       - cmd: register-runner
 
+
+
+reconfigure-nginx:
+  file.managed:
+    - name: /usr/local/bin/reconfigure-nginx.sh
+    - user: root
+    - mode: 755
+    - source: salt://gitlab/reconfigure-nginx.sh
+  - require:
+    - user: gitlab-runner
+  - template: jinja
+
+
 start-runner:
   cmd.run:
     - name: gitlab-runner start
