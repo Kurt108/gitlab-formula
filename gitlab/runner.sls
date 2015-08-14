@@ -9,6 +9,7 @@ repo-gitlab-ci-multi-runner:
   pkgrepo.managed:
     - humanname: gitlab-ci-multi-runner
     - name: deb https://packages.gitlab.com/runner/gitlab-ci-multi-runner/ubuntu/ trusty main
+    - key_url: https://packagecloud.io/gpg.key
     - require_in:
       - pkg: package-gitlab-ci-multi-runner
 
