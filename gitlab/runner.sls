@@ -3,7 +3,11 @@
 include:
   - users
 
-
+apt-key:
+ cmd.run:
+  - name: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 14219A96E15E78F4
+  - require_in:
+   - pkgrepo: repo-gitlab-ci-multi-runner
 
 repo-gitlab-ci-multi-runner:
   pkgrepo.managed:
