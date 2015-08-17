@@ -28,7 +28,7 @@ register-runner:
   cmd.run:
     - name: gitlab-runner register --tag-list  {{ grains['fqdn'] }},{{gitlab.identifier}},{{ grains['fqdn'] }},{{gitlab.identifier}} --description {{ grains['fqdn'] }}-{{gitlab.identifier}} --non-interactive --url {{ gitlab.url }} --registration-token {{ gitlab.token }}
     - unless:
-      - grep 'url = "{{ gitlab.url }}' /etc/gitlab-runner/config.toml
+      - grep 'url = "{{ gitlab.url }}"' /etc/gitlab-runner/config.toml
       - grep 'token = "{{ gitlab.token }}' /etc/gitlab-runner/config.toml
       - grep 'tags = "{{ grains['fqdn'] }},{{gitlab.identifier}},{{ grains['fqdn'] }},{{gitlab.identifier}}' /etc/gitlab-runner/config.toml
       - grep 'name = "{{ grains['fqdn'] }}-{{gitlab.identifier}}' /etc/gitlab-runner/config.toml
