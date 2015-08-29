@@ -34,7 +34,6 @@ register-runner:
       - grep 'name = "{{ grains['fqdn'] }}-{{gitlab.identifier}}' /etc/gitlab-runner/config.toml
     - require:
       - pkg: package-gitlab-ci-multi-runner
-{% endif %}
 
 
 install-runner:
@@ -43,6 +42,18 @@ install-runner:
     - creates: /etc/init/gitlab-runner.conf
     - require:
       - cmd: register-runner
+
+
+
+start-runner:
+  cmd.run:
+    - name: gitlab-runner start
+    - require:
+      - cmd: install-runner
+    - onlyif:
+      - cmd: pgrep -f gitlab-ci-multi-runner
+
+{% endif %}
 
 
 
@@ -55,15 +66,6 @@ reconfigure-nginx:
     - require:
       - user: gitlab-runner
     - template: jinja
-
-
-start-runner:
-  cmd.run:
-    - name: gitlab-runner start
-    - require:
-      - cmd: install-runner
-    - onlyif:
-      - cmd: pgrep -f gitlab-ci-multi-runner
 
 
 github-gitlab-ci-runner:
