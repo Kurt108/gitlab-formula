@@ -23,7 +23,7 @@ package-gitlab-ci-multi-runner:
     - require:
       - user: gitlab-runner
 
-
+{% if gitlab.enabled %}
 register-runner:
   cmd.run:
     - name: gitlab-runner register --tag-list  {{ grains['fqdn'] }},{{gitlab.identifier}},{{ grains['fqdn'] }},{{gitlab.identifier}} --description {{ grains['fqdn'] }}-{{gitlab.identifier}} --non-interactive --url {{ gitlab.url }} --registration-token {{ gitlab.token }}
@@ -34,6 +34,7 @@ register-runner:
       - grep 'name = "{{ grains['fqdn'] }}-{{gitlab.identifier}}' /etc/gitlab-runner/config.toml
     - require:
       - pkg: package-gitlab-ci-multi-runner
+{% endif %}
 
 
 install-runner:
