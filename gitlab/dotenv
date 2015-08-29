@@ -1,0 +1,4 @@
+export SYMFONY__WEBDAV__URL='{{ salt['pillar.get']('symfony2:lookup:webdav_url', 'none') }}'
+export SYMFONY__WEBDAV__USER='{{ salt['pillar.get']('symfony2:lookup:webdav_user', 'none') }}'
+export SYMFONY__WEBDAV__PASS='{{ salt['pillar.get']('symfony2:lookup:webdav_pass', 'none') }}'
+export SYMFONY__CSRF__SECRET='{{ salt['pillar.get']('symfony2:lookup:secret', 'none') }}'
