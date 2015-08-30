@@ -65,7 +65,15 @@ reconfigure-nginx:
     - source: salt://gitlab/reconfigure-nginx.sh
     - require:
       - user: gitlab-runner
-    - template: jinja
+
+reconfigure-nginx:
+  file.managed:
+    - name: /usr/local/bin/copy-config-eventdatabase.sh
+    - user: root
+    - mode: 755
+    - source: salt://gitlab/copy-config-eventdatabase.sh
+    - require:
+      - user: gitlab-runner
 
 
 github-gitlab-ci-runner:
