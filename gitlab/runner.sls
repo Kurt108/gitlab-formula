@@ -57,7 +57,7 @@ start-runner:
 
 
 
-reconfigure-nginx:
+reconfigure-nginx.sh:
   file.managed:
     - name: /usr/local/bin/reconfigure-nginx.sh
     - user: root
@@ -66,7 +66,7 @@ reconfigure-nginx:
     - require:
       - user: gitlab-runner
 
-reconfigure-nginx:
+copy-config-eventdatabase.sh:
   file.managed:
     - name: /usr/local/bin/copy-config-eventdatabase.sh
     - user: root
