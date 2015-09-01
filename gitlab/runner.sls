@@ -57,24 +57,6 @@ start-runner:
 
 
 
-reconfigure-nginx.sh:
-  file.managed:
-    - name: /usr/local/bin/reconfigure-nginx.sh
-    - user: root
-    - mode: 755
-    - source: salt://gitlab/reconfigure-nginx.sh
-    - require:
-      - user: gitlab-runner
-
-copy-config-eventdatabase.sh:
-  file.managed:
-    - name: /usr/local/bin/copy-config-eventdatabase.sh
-    - user: root
-    - mode: 755
-    - source: salt://gitlab/copy-config-eventdatabase.sh
-    - require:
-      - user: gitlab-runner
-
 
 github-gitlab-ci-runner:
   ssh_known_hosts:
