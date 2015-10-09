@@ -26,12 +26,12 @@ package-gitlab-ci-multi-runner:
 {% if gitlab.enabled %}
 register-runner:
   cmd.run:
-    - name: gitlab-runner register --tag-list {{ grains['fqdn'] }},{{gitlab.identifier}} --name {{ grains['fqdn'] }}-{{gitlab.identifier}}-{{ grains['machine_id'] }} --non-interactive --url {{ gitlab.url }} --registration-token {{ gitlab.token }}
+    - name: gitlab-runner register --executor shell --tag-list {{ grains['fqdn'] }},{{gitlab.identifier}} --name {{ grains['fqdn'] }}-{{gitlab.identifier}}-{{ grains['machine_id'] }} --non-interactive --url {{ gitlab.url }} --registration-token {{ gitlab.token }}
     - unless:
       - grep 'url = "{{ gitlab.url }}"' /etc/gitlab-runner/config.toml
-      - grep 'token = "{{ gitlab.token }}' /etc/gitlab-runner/config.toml
-      - grep 'tags = "{{ grains['fqdn'] }}-{{gitlab.identifier}},{{ grains['fqdn'] }},{{gitlab.identifier}}' /etc/gitlab-runner/config.toml
-      - grep 'name = "{{ grains['fqdn'] }}-{{gitlab.identifier}}' /etc/gitlab-runner/config.toml
+      - grep 'token = "{{ gitlab.token }}"' /etc/gitlab-runner/config.toml
+      - grep 'tags = "{{ grains['fqdn'] }},{{gitlab.identifier}}"' /etc/gitlab-runner/config.toml
+      - grep 'name = "{{ grains['fqdn'] }}-{{gitlab.identifier}}-{{ grains['machine_id'] }}"' /etc/gitlab-runner/config.toml
     - require:
       - pkg: package-gitlab-ci-multi-runner
 
